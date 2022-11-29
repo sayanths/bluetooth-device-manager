@@ -24,7 +24,7 @@ class ListOfDevice extends StatelessWidget {
           onPressed: () {
             Routes.back();
           },
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back_ios),
         ),
         backgroundColor: bgColor,
       ),

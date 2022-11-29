@@ -24,25 +24,16 @@ class PairedDevice extends StatelessWidget {
           onPressed: () {
             Routes.back();
           },
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back_ios),
         ),
         backgroundColor: bgColor,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              height: size.height / 20,
-              width: size.width,
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10)),
-                  color: Color.fromARGB(255, 3, 57, 101)),
-            ),
             kSizeBoxHeight20,
             Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               height: size.height / 14,
               width: size.width / 1.1,
               decoration: BoxDecoration(
