@@ -1,3 +1,6 @@
+import 'package:bluetooth_device_manager/app/list_of_devices/view/list_of_device.dart';
+import 'package:bluetooth_device_manager/app/paired_device/view/paired_model.dart';
+import 'package:bluetooth_device_manager/app/routes/routes.dart';
 import 'package:bluetooth_device_manager/app/utiles/colors.dart';
 import 'package:bluetooth_device_manager/app/utiles/const_space.dart';
 import 'package:flutter/material.dart';
@@ -68,25 +71,41 @@ class HomeView extends StatelessWidget {
             ),
           ),
           kSizeBoxHeight20,
-          Image.asset(
-            "assets/bluetooth.png",
-            height: size.height / 10,
-          ),
-          kSizeBoxHeight10,
-          const Text(
-            "Start Scan",
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w500, fontSize: 15),
+          GestureDetector(
+            onTap: () {
+              Routes.push(screen: const ListOfDevice());
+            },
+            child: Column(
+              children: [
+                Image.asset(
+                  "assets/bluetooth.png",
+                  height: size.height / 10,
+                ),
+                kSizeBoxHeight10,
+                const Text(
+                  "Start Scan",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15),
+                ),
+              ],
+            ),
           ),
           kSizeBoxHeight20,
           kSizeBoxHeight20,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              CustomStackContainer(
-                  size: size,
-                  title: "Paired Device",
-                  icon: const CustomPairedDeviceWidget()),
+              InkWell(
+                onTap: () {
+                  Routes.push(screen: const PairedDevice());
+                },
+                child: CustomStackContainer(
+                    size: size,
+                    title: "Paired Device",
+                    icon: const CustomPairedDeviceWidget()),
+              ),
               CustomStackContainer(
                 size: size,
                 title: "Bluetooth Info",
