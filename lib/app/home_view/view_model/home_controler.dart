@@ -17,4 +17,9 @@ class HomeController extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  //LIST OF DEVICE ===========================
+  var devicesList = <BluetoothDevice>[];
+
+  
 }

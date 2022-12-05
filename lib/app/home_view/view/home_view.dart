@@ -20,7 +20,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 0, 64, 117),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 0, 64, 117),
+        backgroundColor: const Color.fromARGB(255, 0, 72, 131),
         elevation: 0,
         title: const Text(
           "Bluetooth Device Managaer",
@@ -35,107 +35,116 @@ class HomeView extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-          child: Column(
-        children: [
-          kSizeBoxHeight20,
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 8, 82, 144),
-                borderRadius: BorderRadius.circular(10)),
-            height: 60,
-            width: size.width / 1.1,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(begin: Alignment.bottomLeft, colors: [
+          Color.fromARGB(255, 0, 29, 104),
+          Color.fromARGB(255, 0, 80, 145),
+          Color.fromARGB(255, 0, 72, 131),
+        ])),
+        child: Column(
+          children: [
+            kSizeBoxHeight20,
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 8, 82, 144),
+                  borderRadius: BorderRadius.circular(10)),
+              height: 60,
+              width: size.width / 1.1,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Bluetooth Status",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 15),
+                    ),
+                    Consumer<HomeController>(
+                      builder: (context, homeProvider, _) {
+                        return Switch(
+                            activeColor:
+                                const Color.fromARGB(255, 250, 250, 250),
+                            activeTrackColor: Colors.cyan,
+                            inactiveThumbColor: Colors.blueGrey.shade600,
+                            inactiveTrackColor: Colors.grey.shade400,
+                            splashRadius: 50.0,
+                            value: homeProvider.value,
+                            onChanged: (value) {
+                              homeProvider.onPressToggle(value);
+                            });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            kSizeBoxHeight20,
+            GestureDetector(
+              onTap: () {
+                Routes.push(screen: const ListOfDevice());
+              },
+              child: Column(
                 children: [
+                  Image.asset(
+                    "assets/bluetooth.png",
+                    height: size.height / 10,
+                  ),
+                  kSizeBoxHeight10,
                   const Text(
-                    "Bluetooth Status",
+                    "Start Scan",
                     style: TextStyle(
                         color: Colors.white,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w500,
                         fontSize: 15),
-                  ),
-                  Consumer<HomeController>(
-                    builder: (context, homeProvider, _) {
-                      return Switch(
-                          activeColor: const Color.fromARGB(255, 250, 250, 250),
-                          activeTrackColor: Colors.cyan,
-                          inactiveThumbColor: Colors.blueGrey.shade600,
-                          inactiveTrackColor: Colors.grey.shade400,
-                          splashRadius: 50.0,
-                          value: homeProvider.value,
-                          onChanged: (value) {
-                            homeProvider.onPressToggle(value);
-                          });
-                    },
                   ),
                 ],
               ),
             ),
-          ),
-          kSizeBoxHeight20,
-          GestureDetector(
-            onTap: () {
-              Routes.push(screen: const ListOfDevice());
-            },
-            child: Column(
+            kSizeBoxHeight20,
+            kSizeBoxHeight20,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Image.asset(
-                  "assets/bluetooth.png",
-                  height: size.height / 10,
+                InkWell(
+                  onTap: () {
+                    Routes.push(screen: const PairedDevice());
+                  },
+                  child: CustomStackContainer(
+                      size: size,
+                      title: "Paired Device",
+                      icon: const CustomPairedDeviceWidget()),
                 ),
-                kSizeBoxHeight10,
-                const Text(
-                  "Start Scan",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15),
+                CustomStackContainer(
+                  size: size,
+                  title: "Bluetooth Info",
+                  icon: const BluetoothInfoButtonCustom(),
                 ),
+                CustomStackContainer(
+                    size: size,
+                    title: "Find Device",
+                    icon: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Iconify(
+                          Arcticons.finddevice,
+                          color: white,
+                          size: 20,
+                        ),
+                        Iconify(
+                          Mdi.mobile_phone,
+                          color: white,
+                        )
+                      ],
+                    )),
               ],
             ),
-          ),
-          kSizeBoxHeight20,
-          kSizeBoxHeight20,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              InkWell(
-                onTap: () {
-                  Routes.push(screen: const PairedDevice());
-                },
-                child: CustomStackContainer(
-                    size: size,
-                    title: "Paired Device",
-                    icon: const CustomPairedDeviceWidget()),
-              ),
-              CustomStackContainer(
-                size: size,
-                title: "Bluetooth Info",
-                icon: const BluetoothInfoButtonCustom(),
-              ),
-              CustomStackContainer(
-                  size: size,
-                  title: "Find Device",
-                  icon: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Iconify(
-                        Arcticons.finddevice,
-                        color: white,
-                        size: 20,
-                      ),
-                      Iconify(
-                        Mdi.mobile_phone,
-                        color: white,
-                      )
-                    ],
-                  )),
-            ],
-          ),
-        ],
+          ],
+        ),
       )),
     );
   }
