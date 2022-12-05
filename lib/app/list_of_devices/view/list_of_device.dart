@@ -51,7 +51,6 @@ class ListOfDevice extends StatelessWidget {
                         maxHeight: size.height,
                         child: ListView.separated(
                           separatorBuilder: (context, index) {
-                            
                             return const SizedBox();
                           },
                           itemCount: 20,
@@ -106,13 +105,12 @@ class CustomDeviceList extends StatelessWidget {
                 Text(
                   "513",
                   style: TextStyle(
-                    fontWeight: FontWeight.w300,
-                    color: white,
-                  ),
+                      fontWeight: FontWeight.w300, color: white, fontSize: 12),
                 ),
                 Text(
                   "major:513",
-                  style: TextStyle(fontWeight: FontWeight.w300, color: white),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w300, color: white, fontSize: 13),
                 ),
               ]),
           trailing: Container(
