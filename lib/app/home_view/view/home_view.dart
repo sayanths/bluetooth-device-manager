@@ -1,3 +1,4 @@
+import 'package:bluetooth_device_manager/app/home_view/view_model/home_controler.dart';
 import 'package:bluetooth_device_manager/app/list_of_devices/view/list_of_device.dart';
 import 'package:bluetooth_device_manager/app/paired_device/view/paired_model.dart';
 import 'package:bluetooth_device_manager/app/routes/routes.dart';
@@ -8,10 +9,11 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/arcticons.dart';
 import 'package:iconify_flutter/icons/material_symbols.dart';
 import 'package:iconify_flutter/icons/mdi.dart';
+import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
-
+  HomeView({super.key});
+  final homeProvider = HomeController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -55,17 +57,20 @@ class HomeView extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                         fontSize: 15),
                   ),
-                  Switch(
-                      // thumb color (round icon)
-                      activeColor: const Color.fromARGB(255, 250, 250, 250),
-                      activeTrackColor: Colors.cyan,
-                      inactiveThumbColor: Colors.blueGrey.shade600,
-                      inactiveTrackColor: Colors.grey.shade400,
-                      splashRadius: 50.0,
-                      // boolean variable value
-                      value: true,
-                      // changes the state of the switch
-                      onChanged: (value) {}),
+                  Consumer<HomeController>(
+                    builder: (context, homeProvider, _) {
+                      return Switch(
+                          activeColor: const Color.fromARGB(255, 250, 250, 250),
+                          activeTrackColor: Colors.cyan,
+                          inactiveThumbColor: Colors.blueGrey.shade600,
+                          inactiveTrackColor: Colors.grey.shade400,
+                          splashRadius: 50.0,
+                          value: homeProvider.value,
+                          onChanged: (value) {
+                            homeProvider.onPressToggle(value);
+                          });
+                    },
+                  ),
                 ],
               ),
             ),

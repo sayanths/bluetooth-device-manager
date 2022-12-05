@@ -1,0 +1,27 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+
+class HomeController extends ChangeNotifier {
+//TOOGLE================================
+
+  bool value = false;
+
+  onPressToggle(bool newValue) async {
+    if (value) {
+      value = newValue;
+      await FlutterBluePlus.instance.turnOff();
+      notifyListeners();
+    } else {
+      value = newValue;
+      await FlutterBluePlus.instance.turnOn();
+      notifyListeners();
+    }
+  }
+
+
+
+
+
+ 
+}
