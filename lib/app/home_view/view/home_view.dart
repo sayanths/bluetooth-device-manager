@@ -38,9 +38,8 @@ class HomeView extends StatelessWidget {
           child: Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(begin: Alignment.bottomLeft, colors: [
-          Color.fromARGB(255, 0, 29, 104),
-          Color.fromARGB(255, 0, 80, 145),
-          Color.fromARGB(255, 0, 72, 131),
+          Color.fromARGB(255, 1, 140, 186),
+          Color.fromARGB(255, 1, 85, 154)
         ])),
         child: Column(
           children: [
@@ -84,25 +83,29 @@ class HomeView extends StatelessWidget {
               ),
             ),
             kSizeBoxHeight20,
-            GestureDetector(
-              onTap: () {
-                Routes.push(screen: const ListOfDevice());
-              },
-              child: Column(
-                children: [
-                  Image.asset(
-                    "assets/bluetooth.png",
-                    height: size.height / 10,
-                  ),
-                  kSizeBoxHeight10,
-                  const Text(
-                    "Start Scan",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15),
-                  ),
-                ],
+            AnimatedContainer(
+              duration: const Duration(seconds: 10),
+              curve: Curves.bounceIn,
+              child: GestureDetector(
+                onTap: () {
+                  Routes.push(screen: const ListOfDevice());
+                },
+                child: Column(
+                  children: [
+                    Image.asset(
+                      "assets/bluetooth.png",
+                      height: size.height / 10,
+                    ),
+                    kSizeBoxHeight10,
+                    const Text(
+                      "Start Scan",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15),
+                    ),
+                  ],
+                ),
               ),
             ),
             kSizeBoxHeight20,
