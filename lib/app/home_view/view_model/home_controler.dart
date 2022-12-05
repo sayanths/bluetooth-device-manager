@@ -19,7 +19,11 @@ class HomeController extends ChangeNotifier {
   }
 
   //LIST OF DEVICE ===========================
-  var devicesList = <BluetoothDevice>[];
+  var flutterBlueP = FlutterBluePlus.instance;
 
-  
+  startScan() async {
+    if (value == true) {
+      notifyListeners();
+    }
+  }
 }

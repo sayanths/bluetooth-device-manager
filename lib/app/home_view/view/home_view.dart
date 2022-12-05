@@ -98,7 +98,7 @@ class HomeView extends StatelessWidget {
                     ),
                     kSizeBoxHeight10,
                     const Text(
-                      "Start Scan",
+                      "Device List",
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,

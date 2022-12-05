@@ -1,15 +1,19 @@
-import 'package:bluetooth_device_manager/app/home_view/view/home_view.dart';
 import 'package:bluetooth_device_manager/app/home_view/view_model/home_controler.dart';
 import 'package:bluetooth_device_manager/app/routes/routes.dart';
+import 'package:bluetooth_device_manager/app/splash_screen/view/splash_screen.dart';
+import 'package:bluetooth_device_manager/app/splash_screen/view_model/splash_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider<HomeController>(create: (context) => HomeController(),),
-    ],
-    child: const MyApp()));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider<HomeController>(
+      create: (context) => HomeController(),
+    ),
+    ChangeNotifierProvider<SplashScreenProvider>(
+      create: (context) => SplashScreenProvider(),
+    ),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -24,6 +28,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home:  HomeView());
+        home: const SplashScreen());
   }
 }
