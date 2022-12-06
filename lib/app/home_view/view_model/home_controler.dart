@@ -6,9 +6,7 @@ import 'package:toast/toast.dart';
 
 class HomeController extends ChangeNotifier {
 //TOOGLE================================
-  HomeController() {
-    onScan();
-  }
+  HomeController();
   final flutterBlueP = FlutterBluePlus.instance;
 
   bool value = false;
@@ -28,16 +26,6 @@ class HomeController extends ChangeNotifier {
   }
 
   //LIST OF DEVICE ===========================
-
-  onScan() {
-    if (value == true) {
-      flutterBlueP.scanResults.listen((results) {
-        for (ScanResult r in results) {
-          print('${r.device.name} found! rssi: ${r.rssi}');
-        }
-      });
-    }
-  }
 
   void showToast(String msg, {int? duration, int? gravity}) {
     Toast.show(msg, duration: duration, gravity: gravity);
