@@ -27,7 +27,7 @@ class BlueToothInfo extends StatelessWidget {
           kSizeBoxHeight20,
           CustomContainer(
               size: size,
-              height: size.height * .40,
+              height: size.height * .36,
               width: size.width / 1.1,
               child: Column(
                 children: const [
@@ -42,8 +42,82 @@ class BlueToothInfo extends StatelessWidget {
                       mainTitile: "Type :", subTitle: "Classic -BR/EDR"),
                   CustomTextTitles(mainTitile: "State :", subTitle: "ON"),
                 ],
+              )),
+          kSizeBoxHeight20,
+          CustomContainer(
+              size: size,
+              height: size.height * .20,
+              width: size.width / 1.1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const MainTitleText(title: "Profile Supported :"),
+                  kSizeBoxHeight20,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      CustomTextAnswers(title: "A2DP -SRC"),
+                      CustomTextAnswers(title: "HFP -Audio Gateway"),
+                      CustomTextAnswers(title: "HSP"),
+                    ],
+                  ),
+                ],
+              )),
+          kSizeBoxHeight20,
+          CustomContainer(
+              size: size,
+              height: size.height * .20,
+              width: size.width / 1.1,
+              child: Column(
+                children: const [
+                  MainTitleText(title: "UUID List :"),
+                  kSizeBoxHeight20,
+                  CustomTextAnswers(title: "000146a-5846-8556-00255-5fb9s"),
+                  CustomTextAnswers(title: "000146a-5846-8556-00255-5fb6p"),
+                  CustomTextAnswers(title: "000146a-5846-8556-00255-5fb2m"),
+                ],
               ))
         ],
+      ),
+    );
+  }
+}
+
+class CustomTextAnswers extends StatelessWidget {
+  final String title;
+  const CustomTextAnswers({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: const TextStyle(
+          color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600),
+    );
+  }
+}
+
+class MainTitleText extends StatelessWidget {
+  final String title;
+  const MainTitleText({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          title,
+          style: const TextStyle(
+              color: Colors.blue, fontSize: 18, fontWeight: FontWeight.w600),
+        ),
       ),
     );
   }
@@ -71,7 +145,7 @@ class CustomTextTitles extends StatelessWidget {
               flex: 3,
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                 child: Text(
                   mainTitile,
                   style: const TextStyle(
@@ -93,7 +167,9 @@ class CustomTextTitles extends StatelessWidget {
             ),
           ],
         ),
-        kSizeBoxHeight20,
+        const SizedBox(
+          height: 5,
+        ),
       ],
     );
   }
