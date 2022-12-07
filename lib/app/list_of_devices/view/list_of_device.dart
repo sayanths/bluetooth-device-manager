@@ -8,13 +8,12 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/mdi.dart';
 import 'package:provider/provider.dart';
 
-
 class ListOfDevice extends StatelessWidget {
   const ListOfDevice({super.key});
 
   @override
   Widget build(BuildContext context) {
-    context.read<HomeController>();
+    context.read<HomeController>().onScan();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: bgColor,
@@ -38,32 +37,51 @@ class ListOfDevice extends StatelessWidget {
             .startScan(timeout: const Duration(seconds: 4)),
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                DeviceFoundCustom(size: size, title: "Device(s) found: 5"),
-                kSizeBoxHeight20,
-                Consumer<HomeController>(builder: (context, value, _) {
-                  return LimitedBox(
-                    maxHeight: size.height,
-                    child: ListView.separated(
-                      separatorBuilder: (context, index) {
-                        return const SizedBox();
-                      },
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        // final device = value.scanResultList[index];
-                        return CustomDeviceList(
+              padding: const EdgeInsets.all(8.0),
+              child: Consumer<HomeController>(
+                builder: (context, value, _) {
+                  return Column(
+                    children: [
+                      DeviceFoundCustom(
                           size: size,
-                        );
-                      },
-                    ),
+                          title:
+                              "Device(s) found: ${value.devicesList.length}"),
+                      kSizeBoxHeight20,
+                      StreamBuilder(
+                        stream: value.flutterBlueP.scanResults,
+                        builder: (context, snapshot) {
+                          return snapshot.hasData
+                              ? LimitedBox(
+                                  maxHeight: size.height,
+                                  child: ListView.separated(
+                                    separatorBuilder: (context, index) {
+                                      return const SizedBox();
+                                    },
+                                    itemCount: value.devicesList.length,
+                                    itemBuilder: (context, index) {
+                                      final device = value.devicesList[index];
+                                      return CustomDeviceList(
+                                        device: device,
+                                        size: size,
+                                      );
+                                    },
+                                  ),
+                                )
+                              : const Center(
+                                  child: Text(
+                                    "No Device found",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                );
+                        },
+                      ),
+                      kSizeBoxHeight20,
+                    ],
                   );
-                }),
-                kSizeBoxHeight20,
-              ],
-            ),
-          ),
+                },
+              )),
         ),
       ),
     );
@@ -95,7 +113,7 @@ class CustomDeviceList extends StatelessWidget {
             icon: Mdi.mobile_phone,
           ),
           title: Text(
-            "opps",
+            device!.name.isEmpty ? '(unknown device)' : device!.name,
             style: TextStyle(fontWeight: FontWeight.w500, color: white),
           ),
           subtitle: Column(
@@ -103,12 +121,12 @@ class CustomDeviceList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "513",
+                  device!.id.toString(),
                   style: TextStyle(
                       fontWeight: FontWeight.w300, color: white, fontSize: 12),
                 ),
                 Text(
-                  "major:513",
+                  "major: ${device!.id.id.substring(0, 5)}",
                   style: TextStyle(
                       fontWeight: FontWeight.w300, color: white, fontSize: 13),
                 ),
