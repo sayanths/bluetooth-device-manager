@@ -44,6 +44,7 @@ dependencies:
   toast: ^0.3.0
   flutter_scan_bluetooth: ^2.1.2
   bluetooth_connector: ^0.0.3
+  android_intent_plus: ^3.1.5
   
 
 dev_dependencies:

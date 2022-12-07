@@ -1,3 +1,4 @@
+import 'package:bluetooth_device_manager/app/blue_tooth_info/view/bluethooth_info.dart';
 import 'package:bluetooth_device_manager/app/home_view/view_model/home_controler.dart';
 import 'package:bluetooth_device_manager/app/list_of_devices/view/list_of_device.dart';
 import 'package:bluetooth_device_manager/app/paired_device/view/paired_model.dart';
@@ -122,10 +123,15 @@ class HomeView extends StatelessWidget {
                       title: "Paired Device",
                       icon: const CustomPairedDeviceWidget()),
                 ),
-                CustomStackContainer(
-                  size: size,
-                  title: "Bluetooth Info",
-                  icon: const BluetoothInfoButtonCustom(),
+                InkWell(
+                  onTap: () {
+                    Routes.push(screen: const BlueToothInfo());
+                  },
+                  child: CustomStackContainer(
+                    size: size,
+                    title: "Bluetooth Info",
+                    icon: const BluetoothInfoButtonCustom(),
+                  ),
                 ),
                 CustomStackContainer(
                     size: size,
