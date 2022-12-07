@@ -45,24 +45,25 @@ class BlueToothInfo extends StatelessWidget {
               )),
           kSizeBoxHeight20,
           CustomContainer(
-              size: size,
-              height: size.height * .20,
-              width: size.width / 1.1,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const MainTitleText(title: "Profile Supported :"),
-                  kSizeBoxHeight20,
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      CustomTextAnswers(title: "A2DP -SRC"),
-                      CustomTextAnswers(title: "HFP -Audio Gateway"),
-                      CustomTextAnswers(title: "HSP"),
-                    ],
-                  ),
-                ],
-              )),
+            size: size,
+            height: size.height * .20,
+            width: size.width / 1.1,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const MainTitleText(title: "Profile Supported :"),
+                kSizeBoxHeight20,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    CustomTextAnswers(title: "A2DP -SRC"),
+                    CustomTextAnswers(title: "HFP -Audio Gateway"),
+                    CustomTextAnswers(title: "HSP"),
+                  ],
+                ),
+              ],
+            ),
+          ),
           kSizeBoxHeight20,
           CustomContainer(
               size: size,
