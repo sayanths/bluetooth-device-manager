@@ -13,7 +13,7 @@ class ListOfDevice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<HomeController>().onScan();
+    context.read<HomeController>().newScan();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: bgColor,
@@ -89,7 +89,7 @@ class ListOfDevice extends StatelessWidget {
 }
 
 class CustomDeviceList extends StatelessWidget {
-  final BluetoothDevice? device;
+  final ScanResult? device;
   const CustomDeviceList({
     Key? key,
     required this.size,
@@ -113,7 +113,9 @@ class CustomDeviceList extends StatelessWidget {
             icon: Mdi.mobile_phone,
           ),
           title: Text(
-            device!.name.isEmpty ? '(unknown device)' : device!.name,
+            device!.device.name.isEmpty
+                ? '(unknown device)'
+                : device!.device.name,
             style: TextStyle(fontWeight: FontWeight.w500, color: white),
           ),
           subtitle: Column(
@@ -121,12 +123,12 @@ class CustomDeviceList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  device!.id.toString(),
+                  device!.device.id.toString(),
                   style: TextStyle(
                       fontWeight: FontWeight.w300, color: white, fontSize: 12),
                 ),
                 Text(
-                  "major: ${device!.id.id.substring(0, 5)}",
+                  "major: ${device!.device.id.id.substring(0, 5)}",
                   style: TextStyle(
                       fontWeight: FontWeight.w300, color: white, fontSize: 13),
                 ),

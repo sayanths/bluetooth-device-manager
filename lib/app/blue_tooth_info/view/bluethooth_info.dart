@@ -1,7 +1,9 @@
+import 'package:bluetooth_device_manager/app/home_view/view_model/home_controler.dart';
 import 'package:bluetooth_device_manager/app/routes/routes.dart';
 import 'package:bluetooth_device_manager/app/utiles/colors.dart';
 import 'package:bluetooth_device_manager/app/utiles/const_space.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BlueToothInfo extends StatelessWidget {
   const BlueToothInfo({super.key});
@@ -9,76 +11,90 @@ class BlueToothInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: bgColor,
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Bluetooth Information"),
-        elevation: 0,
-        leading: IconButton(
-            onPressed: () {
-              Routes.back();
-            },
-            icon: const Icon(Icons.arrow_back_ios)),
+    return Consumer<HomeController>(
+      builder: (context, value, _) => Scaffold(
         backgroundColor: bgColor,
-      ),
-      body: Column(
-        children: [
-          kSizeBoxHeight20,
-          CustomContainer(
-              size: size,
-              height: size.height * .36,
-              width: size.width / 1.1,
-              child: Column(
-                children: const [
-                  CustomTextTitles(mainTitile: "Name :", subTitle: "Say"),
-                  CustomTextTitles(
-                      mainTitile: "Mac Address :", subTitle: "020:00:00:00"),
-                  CustomTextTitles(
-                      mainTitile: "Discovering :", subTitle: "False"),
-                  CustomTextTitles(
-                      mainTitile: "Scan Mode :", subTitle: "CONNECTABLE"),
-                  CustomTextTitles(
-                      mainTitile: "Type :", subTitle: "Classic -BR/EDR"),
-                  CustomTextTitles(mainTitile: "State :", subTitle: "ON"),
-                ],
-              )),
-          kSizeBoxHeight20,
-          CustomContainer(
-            size: size,
-            height: size.height * .20,
-            width: size.width / 1.1,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const MainTitleText(title: "Profile Supported :"),
-                kSizeBoxHeight20,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    CustomTextAnswers(title: "A2DP -SRC"),
-                    CustomTextAnswers(title: "HFP -Audio Gateway"),
-                    CustomTextAnswers(title: "HSP"),
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text("Bluetooth Information"),
+          elevation: 0,
+          leading: IconButton(
+              onPressed: () {
+                Routes.back();
+              },
+              icon: const Icon(Icons.arrow_back_ios)),
+          backgroundColor: bgColor,
+        ),
+        body: Consumer<HomeController>(
+          builder: (context, value, _) => Column(
+            children: [
+              kSizeBoxHeight20,
+              CustomContainer(
+                  size: size,
+                  height: size.height * .36,
+                  width: size.width / 1.1,
+                  child: Column(
+                    children: [
+                      const CustomTextTitles(
+                          mainTitile: "Name :", subTitle: "Say"),
+                      CustomTextTitles(
+                          mainTitile: "Mac Address :",
+                          subTitle: "${value.devicesList.first.device.id}"),
+                      CustomTextTitles(
+                          mainTitile: "Discovering :",
+                          subTitle:
+                              "${value.devicesList.first.advertisementData.connectable}"),
+                      CustomTextTitles(
+                          mainTitile: "Scan Mode :",
+                          subTitle: value.devicesList.first.advertisementData
+                                      .connectable ==
+                                  true
+                              ? "CONNECTABLE"
+                              : "NOT CONNECTABLE"),
+                      const CustomTextTitles(
+                          mainTitile: "Type :", subTitle: "Classic -BR/EDR"),
+                      const CustomTextTitles(
+                          mainTitile: "State :", subTitle: "ON"),
+                    ],
+                  )),
+              kSizeBoxHeight20,
+              CustomContainer(
+                size: size,
+                height: size.height * .20,
+                width: size.width / 1.1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const MainTitleText(title: "Profile Supported :"),
+                    kSizeBoxHeight20,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        CustomTextAnswers(title: "A2DP -SRC"),
+                        CustomTextAnswers(title: "HFP -Audio Gateway"),
+                        CustomTextAnswers(title: "HSP"),
+                      ],
+                    ),
                   ],
                 ),
-              ],
-            ),
+              ),
+              kSizeBoxHeight20,
+              CustomContainer(
+                  size: size,
+                  height: size.height * .20,
+                  width: size.width / 1.1,
+                  child: Column(
+                    children: const [
+                      MainTitleText(title: "UUID List :"),
+                      kSizeBoxHeight20,
+                      CustomTextAnswers(title: "000146a-5846-8556-00255-5fb9s"),
+                      CustomTextAnswers(title: "000146a-5846-8556-00255-5fb6p"),
+                      CustomTextAnswers(title: "000146a-5846-8556-00255-5fb2m"),
+                    ],
+                  ))
+            ],
           ),
-          kSizeBoxHeight20,
-          CustomContainer(
-              size: size,
-              height: size.height * .20,
-              width: size.width / 1.1,
-              child: Column(
-                children: const [
-                  MainTitleText(title: "UUID List :"),
-                  kSizeBoxHeight20,
-                  CustomTextAnswers(title: "000146a-5846-8556-00255-5fb9s"),
-                  CustomTextAnswers(title: "000146a-5846-8556-00255-5fb6p"),
-                  CustomTextAnswers(title: "000146a-5846-8556-00255-5fb2m"),
-                ],
-              ))
-        ],
+        ),
       ),
     );
   }
